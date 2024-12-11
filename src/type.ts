@@ -1,4 +1,4 @@
-import { IS_NEGATIVE } from './constant';
+import { IS_NEGATIVE } from '../../worker/my-first-worker/src/constant';
 
 export type ResolveFunction<T = void> = (value: T) => void;
 
@@ -39,7 +39,7 @@ export interface Gallery {
 		display: string;
 		japanese: string | null;
 	};
-	type: 'doujinshi' | 'manga' | 'artistcg' | 'gamecg' | 'anime';
+	type: 'doujinshi' | 'manga' | 'artistcg' | 'gamecg' | 'anime' | 'imageset';
 	languageName: {
 		english: string | null;
 		local: string | null;

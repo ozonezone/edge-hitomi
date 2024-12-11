@@ -2,7 +2,7 @@ import {IncomingMessage, OutgoingHttpHeaders} from 'http';
 import {request, Agent, AgentOptions} from 'https';
 import {connect, TLSSocket} from 'tls';
 import {IdSet, Node, RejectFunction, ResolveFunction} from './type';
-import {ERROR_CODE, IS_NEGATIVE} from './constant';
+import {ERROR_CODE, IS_NEGATIVE} from '../../worker/my-first-worker/src/constant';
 
 // TODO: HitomiError moved to src/HitomiError.ts
 export class HitomiError extends Error {

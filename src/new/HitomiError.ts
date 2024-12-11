@@ -38,5 +38,7 @@ const errorFormatters: Record<ErrorCodeType, (values: (string | number)[]) => st
 		`${values[0]}${errorMessages.mustHave}${errorMessages.moreElements}`,
 	
 	[ERROR_CODE.REQUEST_REJECTED]: (values) =>
-		`${errorMessages.requestRejected}[${values[0]}]${values[1]}`
+		`${errorMessages.requestRejected}[${values[0]}]${values[1]}`,
+	[ERROR_CODE.INVALID_TAG]: (values) =>
+		`${values[0]}${errorMessages.mustBe}${errorMessages.valid}`
 };

@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { ERROR_CODE, IS_NEGATIVE, RAW_GALLERY_KEYS } from './constant';
+import { ERROR_CODE, IS_NEGATIVE, RAW_GALLERY_KEYS } from '../../worker/my-first-worker/src/constant';
 import { IdSet, JsonObject, Node, PopularityPeriod, Tag } from './type';
 import { Gallery } from './type';
 import { getNozomiUri } from './uri';

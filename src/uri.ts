@@ -1,4 +1,4 @@
-import { ERROR_CODE, PATH_CODE, STARTS_WITH_A, SUBDOMAIN_CODES } from './constant';
+import { ERROR_CODE, PATH_CODE, STARTS_WITH_A, SUBDOMAIN_CODES } from '../../worker/my-first-worker/src/constant';
 import { Gallery, Image, PopularityPeriod, StartingCharacter, Tag } from './type';
 import { HitomiError, fetch } from './utility';
 

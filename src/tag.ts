@@ -1,4 +1,4 @@
-import { ERROR_CODE, TAG_TYPES } from './constant';
+import { ERROR_CODE, TAG_TYPES } from '../../worker/my-first-worker/src/constant';
 import { StartingCharacter, Tag } from './type';
 import { getTagUri } from './uri';
 import { HitomiError, fetch } from './utility';
