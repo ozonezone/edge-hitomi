@@ -6,6 +6,7 @@ import {ERROR_CODE, HITOMI_LA, HTTPS} from "../namedConstants";
  * Returns the URI for the video of the given gallery
  * @param {Gallery} gallery - The gallery object to get the video URI of
  * @returns {string} - The URI for the video
+ * @throws {HitomiError} - Throws an error if the gallery type is not 'anime'
  */
 export function getVideoUri(gallery: Gallery) {
 	if(gallery.type !== 'anime') {

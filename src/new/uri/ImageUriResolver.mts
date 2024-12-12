@@ -12,6 +12,7 @@ export class ImageUriResolver {
 
 	/**
 	 * Synchronizes the subdomain codes and path codes.
+	 * @throws {HitomiError} - If the subdomain codes contain an invalid value
 	 */
 	static async synchronize(): Promise<void> {
 		this.#response = await edgeFetch('ltn.', '/gg.js')
@@ -46,11 +47,12 @@ export class ImageUriResolver {
 			nextIndex = this.#response.indexOf('\n', currentIndex);
 		}
 
-		if(!this.#subdomainCodes.has(NaN)) {
-			return;
+		if(this.#subdomainCodes.has(NaN)) {
+			this.#subdomainCodes.clear();
+			throw new HitomiError(ERROR_CODE.INVALID_VALUE, "/gg.js");
 		}
-		this.#subdomainCodes.clear();
-		throw new HitomiError(ERROR_CODE.INVALID_VALUE, "/gg.js");
+
+		return;
 	}
 
 	/**
@@ -63,6 +65,7 @@ export class ImageUriResolver {
 	 * @returns {string} - The URI of the image
 	 * @throws {HitomiError} - If the image does not have the given extension
 	 * @throws {HitomiError} - If the subdomain codes are not synchronized
+	 * @throws {HitomiError} - If the image is not a thumbnail and is small
 	 **/
 	static getImageUri(
 		image: HitomiImage,

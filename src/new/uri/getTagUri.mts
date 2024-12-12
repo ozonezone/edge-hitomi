@@ -7,6 +7,8 @@ import {HitomiError} from "../utils/HitomiError";
  * @param {string} type - The type of tag to get the URI for. (except 'type' type)
  * @param {StartingCharacter} startsWith - The starting character for the tag URI.
  * *Note: startsWith is required for non-language types.*
+ * @returns {string} - The URI for the specified tag type.
+ * @throws {HitomiError} - Throws an error if the type is invalid or if startsWith is not provided for non-language types.
  */
 export function getTagUri(type: TagTypes, startsWith?: StartingCharacter) {
 	if(type === 'language') {
