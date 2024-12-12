@@ -3,15 +3,15 @@ import { getParsedTags, getTags } from './tag';
 import { getNozomiUri, getTagUri, getVideoUri, getGalleryUri, ImageUriResolver } from './uri';
 
 export default {
-	getGallery,
+	getGallery, // TODO: REFACTORED
 	getGalleryIds,
-	getParsedTags,
-	getTags,
+	getParsedTags, // TODO: REFACTORED
+	getTags, // TODO: REFACTORED
 	getNozomiUri,
-	getTagUri,
-	getVideoUri,
-	getGalleryUri,
-	ImageUriResolver,
+	getTagUri, // TODO: REFACTORED
+	getVideoUri, // TODO: REFACTORED
+	getGalleryUri, // TODO: REFACTORED
+	ImageUriResolver, // TODO: REFACTORED
 	default: {
 		getGallery,
 		getGalleryIds,

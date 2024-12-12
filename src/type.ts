@@ -1,4 +1,4 @@
-import { IS_NEGATIVE } from '../../worker/my-first-worker/src/constant';
+import { IS_NEGATIVE } from './constant';
 
 export type ResolveFunction<T = void> = (value: T) => void;
 

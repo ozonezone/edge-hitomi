@@ -1,5 +1,5 @@
-import {ERROR_CODE, errorMessages} from "./namedConstants";
-import {ErrorCodeType} from "./newType";
+import {ERROR_CODE, errorMessages} from "../namedConstants";
+import {ErrorCodeType} from "../newType";
 
 /**
  * Custom error class for handling Hitomi-specific errors
@@ -28,17 +28,13 @@ const errorFormatters: Record<ErrorCodeType, (values: (string | number)[]) => st
 	[ERROR_CODE.INVALID_VALUE]: (values) =>
 		`${values[0]}${errorMessages.mustBe}${values[1] || errorMessages.valid}`,
 	
-	[ERROR_CODE.INVALID_CALL]: (values) =>
-		`${values[0]}${errorMessages.mustBe}${values[1]}`,
-	
 	[ERROR_CODE.DUPLICATED_ELEMENT]: (values) =>
 		`${values[0]}${errorMessages.mustNotBe}${errorMessages.duplicated}`,
 	
 	[ERROR_CODE.LACK_OF_ELEMENT]: (values) =>
-		`${values[0]}${errorMessages.mustHave}${errorMessages.moreElements}`,
+		`${values[0]}${errorMessages.mustHave}${values[1] || errorMessages.moreElements}`,
 	
 	[ERROR_CODE.REQUEST_REJECTED]: (values) =>
 		`${errorMessages.requestRejected}[${values[0]}]${values[1]}`,
-	[ERROR_CODE.INVALID_TAG]: (values) =>
-		`${values[0]}${errorMessages.mustBe}${errorMessages.valid}`
+
 };

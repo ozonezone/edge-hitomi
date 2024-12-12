@@ -1,4 +1,4 @@
-import { ERROR_CODE, PATH_CODE, STARTS_WITH_A, SUBDOMAIN_CODES } from '../../worker/my-first-worker/src/constant';
+import { ERROR_CODE, PATH_CODE, STARTS_WITH_A, SUBDOMAIN_CODES } from './constant';
 import { Gallery, Image, PopularityPeriod, StartingCharacter, Tag } from './type';
 import { HitomiError, fetch } from './utility';
 
@@ -45,7 +45,7 @@ export function getTagUri(type: Tag['type'], startsWith?: StartingCharacter): st
 		let path: string = 'all';
 
 		if(isLanguage) {
-			path = 'language_support';
+			path = 'language_support.js';
 		} else {
 			subdomain = '';
 
@@ -113,24 +113,23 @@ export class ImageUriResolver {
 			
 			while(nextIndex !== -1) {
 				switch(responseText[currentIndex]) {
+					// in gg.js it is the "b: {number}/" line
 					case 'b': {
 						ImageUriResolver[PATH_CODE] = responseText.slice(currentIndex + 4, nextIndex - 2);
-
 						break;
 					}
-
+					// in gg.js it is the "o = {0 | 1}; break;" line
 					case 'o': {
 						ImageUriResolver[STARTS_WITH_A] = responseText[currentIndex + 4] === '0';
-
 						break;
 					}
-
+					// in gg.js it is the "case {number}:" lines
 					case 'c': {
 						ImageUriResolver[SUBDOMAIN_CODES].add(Number(responseText.slice(currentIndex + 5, nextIndex - 1)));
-
 						break;
 					}
 				}
+
 
 				currentIndex = nextIndex + 1;
 				nextIndex = responseText.indexOf('\n', currentIndex);
