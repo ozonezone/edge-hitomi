@@ -72,6 +72,43 @@ type PopularityPeriod = 'day' | 'week' | 'month' | 'year';
  */
 declare function getGallery(id: number, userHeaders?: Headers): Promise<Gallery>;
 
+/**
+ * Main function to fetch and filter gallery IDs based on various criteria.
+ * Implements a complex search and filter pipeline with multiple stages:
+ *
+ * 1. Title-based search:
+ *    - Each word in the title is hashed
+ *    - B-tree is searched for each hash
+ *    - Results are intersected
+ *
+ * 2. Tag-based filtering:
+ *    - Positive tags: Results must contain all tags
+ *    - Negative tags: Results must not contain any tags
+ *
+ * 3. Popularity-based ordering:
+ *    - Optional sorting by different popularity metrics
+ *
+ * 4. Range-based pagination:
+ *    - Can be applied at HTTP level for simple queries
+ *    - Applied after filtering for complex queries
+ *
+ * @param {Object} options - Search and filter options
+ * @param {string} [options.title] - Title to search for
+ * @param {Tag[]} [options.tags] - Array of tags to filter by
+ * @param {Object} [options.range] - Pagination range
+ * @param {number} [options.range.start] - Start index
+ * @param {number} [options.range.end] - End index
+ * @param {PopularityPeriod} [options.popularityOrderBy] - Popularity sorting option
+ * @returns {Promise<number[]>} Array of matching gallery IDs
+ *
+ * @example
+ * // Search for galleries with specific title and tags
+ * const ids = await getGalleryIds({
+ *   title: "search term",
+ *   tags: [{name: "tag1", isNegative: false}],
+ *   range: {start: 0, end: 10}
+ * });
+ */
 declare function getGalleryIds(options?: {
     title?: string;
     tags?: Tag[];
@@ -114,12 +151,12 @@ declare function getParsedTags(stringifiedTags: string, delimiter?: string | Reg
 declare function getTags(type: TagTypes, startsWith?: StartingCharacter): Promise<Tag[]>;
 
 /**
- * Generates a Nozomi URI based on the provided parameters.
+ * Generates a Nozomi URI based on the provided options.
  *
- * @param {Tag} [params.tag] - The tag to filter by.
- * @param {PopularityPeriod} [params.popularityOrderBy] - The period to order by popularity.
+ * @param {Object} options - The options for generating the URI.
+ * @param {Tag} [options.tag] - The tag to include in the URI.
+ * @param {PopularityPeriod} [options.popularityOrderBy] - The popularity period to order by.
  * @returns {string} The generated Nozomi URI.
- * @param options
  */
 declare function getNozomiUri(options?: {
     tag?: Tag;
@@ -145,41 +182,9 @@ declare function getTagUri(type: TagTypes, startsWith?: StartingCharacter): stri
 declare function getVideoUri(gallery: Gallery): string;
 
 /**
- * Main function to fetch and filter gallery IDs based on various criteria.
- * Implements a complex search and filter pipeline with multiple stages:
- *
- * 1. Title-based search:
- *    - Each word in the title is hashed
- *    - B-tree is searched for each hash
- *    - Results are intersected
- *
- * 2. Tag-based filtering:
- *    - Positive tags: Results must contain all tags
- *    - Negative tags: Results must not contain any tags
- *
- * 3. Popularity-based ordering:
- *    - Optional sorting by different popularity metrics
- *
- * 4. Range-based pagination:
- *    - Can be applied at HTTP level for simple queries
- *    - Applied after filtering for complex queries
- *
- * @param {Object} options - Search and filter options
- * @param {string} [options.title] - Title to search for
- * @param {Tag[]} [options.tags] - Array of tags to filter by
- * @param {Object} [options.range] - Pagination range
- * @param {number} [options.range.start] - Start index
- * @param {number} [options.range.end] - End index
- * @param {PopularityPeriod} [options.popularityOrderBy] - Popularity sorting option
- * @returns {Promise<number[]>} Array of matching gallery IDs
- *
- * @example
- * // Search for galleries with specific title and tags
- * const ids = await getGalleryIds({
- *   title: "search term",
- *   tags: [{name: "tag1", isNegative: false}],
- *   range: {start: 0, end: 10}
- * });
+ * Generates the Hitomi Gallery URI.
+ * @param {Gallery | number | string} gallery - The gallery object or ID.
+ * @returns {string} The generated Hitomi Gallery URI.
  */
 declare function getGalleryUri(gallery: Gallery | number | string): string;
 
