@@ -3,6 +3,7 @@ import {ContentTypes, StartingCharacter, Tag, TagTypes} from "../type.mjs";
 import {ERROR_CODE, validContentTypes, validTagTypes} from "../constants.mjs";
 import {HitomiError} from "../utils/HitomiError.mjs";
 import {getTagUri} from "../uri/getTagUri.mjs";
+import {edgeFetch} from "../utils/edgeFetch.mjs";
 
 /**
  * Fetches tags based on the provided type and optional starting character.
@@ -25,7 +26,9 @@ export async function getTags(type: TagTypes, startsWith?: StartingCharacter): P
             }))
         );
 	}
-	const response: string = await fetch(getTagUri(type, startsWith))
+	const path: string = new URL(getTagUri(type, startsWith)).pathname;
+	
+	const response: string = await edgeFetch('ltn.', path as `/${string}`)
 		.then(res => res.text())
 		.then(text => text);
 	if (type === 'language') {

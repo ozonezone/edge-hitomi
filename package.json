@@ -1,41 +1,44 @@
 {
-	"name": "edge-hitomi",
-	"version": "8.0.5-edge.1-pre-release",
-	"description": "edging hitomi",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"scripts": {
-		"build": "tsup src/index.mts --format cjs,esm --dts --minify terser --treeshake",
-		"test": "node --require=ts-node/register --watch src/test.mts",
-		"lint": "eslint src --ext .ts",
-		"prepublishOnly": "npm run build"
-	},
-	"keywords": [
-		"hitomi",
-		"edge"
-	],
-	"author": {
-		"name": "ztmayo"
-	},
-	"contributors": [
-		{
-			"name": "H2Owater425",
-			"email": "h2o@dhmo.kr",
-			"url": "https://github.com/h2owater425/node-hitomi"
-		}
-	],
-	"license": "MIT",
-	"devDependencies": {
-		"@cloudflare/next-on-pages": "^1.13.7",
-		"@eslint/js": "^9.16.0",
-		"@types/node": "^20.17.6",
-		"eslint": "^9.16.0",
-		"eslint-plugin-next-on-pages": "^1.13.7",
-		"terser": "^5.37.0",
-		"ts-node": "^10.9.2",
-		"tslib": "^2.8.1",
-		"tsup": "^8.3.5",
-		"typescript": "^5.7.2",
-		"typescript-eslint": "^8.18.0"
+  "name": "edge-hitomi",
+  "version": "8.0.5-edge.1-pre-release",
+  "description": "edging hitomi",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+	"dist"
+  ],
+  "scripts": {
+	"build": "tsup src/index.mts --format cjs,esm --dts --minify terser --treeshake",
+	"test": "node --require=ts-node/register --watch src/test.mts",
+	"lint": "eslint src --ext .ts",
+	"prepublishOnly": "npm run build"
+  },
+  "keywords": [
+	"hitomi",
+	"edge"
+  ],
+  "author": {
+	"name": "ztmayo"
+  },
+  "contributors": [
+	{
+	  "name": "H2Owater425",
+	  "email": "h2o@dhmo.kr",
+	  "url": "https://github.com/h2owater425/node-hitomi"
 	}
+  ],
+  "license": "MIT",
+  "devDependencies": {
+	"@cloudflare/next-on-pages": "^1.13.7",
+	"@eslint/js": "^9.16.0",
+	"@types/node": "^20.17.6",
+	"eslint": "^9.16.0",
+	"eslint-plugin-next-on-pages": "^1.13.7",
+	"terser": "^5.37.0",
+	"ts-node": "^10.9.2",
+	"tslib": "^2.8.1",
+	"tsup": "^8.3.5",
+	"typescript": "^5.7.2",
+	"typescript-eslint": "^8.18.0"
+  }
 }
