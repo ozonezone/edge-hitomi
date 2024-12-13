@@ -1,4 +1,4 @@
-import {ERROR_CODE} from "./namedConstants";
+import {ERROR_CODE, IS_NEGATIVE} from "./constants.mjs";
 
 /**
  * Type representing the values of the ERROR_CODE object.
@@ -105,3 +105,27 @@ export type StartingCharacter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 
  * Type representing the values of the popularity periods.
  */
 export type PopularityPeriod = 'day' | 'week' | 'month' | 'year';
+
+/**
+ * Extended Set type that includes isNegative flag for the entire collection
+ */
+export interface IdSet extends Set<number> {
+	[IS_NEGATIVE]: boolean;
+}
+
+/**
+ * Represents a node in the binary search tree used for gallery indexing.
+ * Each node contains keys for searching, data pointers, and references to child nodes.
+ *
+ * @interface
+ */
+export interface Node {
+	/** Array of keys used for searching */
+	keys: Uint8Array[];
+	/** Array of [offset, length] pairs pointing to gallery data */
+	datas: [bigint, number][];
+	/** Array of addresses pointing to child nodes */
+	subnodeAddresses: bigint[];
+}
+
+

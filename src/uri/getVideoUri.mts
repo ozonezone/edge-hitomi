@@ -1,6 +1,6 @@
-import {Gallery} from "../newType";
-import {HitomiError} from "../utils/HitomiError";
-import {ERROR_CODE, HITOMI_LA, HTTPS} from "../namedConstants";
+import {Gallery} from "../type.mjs";
+import {HitomiError} from "../utils/HitomiError.mjs";
+import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
 
 /**
  * Returns the URI for the video of the given gallery

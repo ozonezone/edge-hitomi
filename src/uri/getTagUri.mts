@@ -1,6 +1,6 @@
-import {TagTypes, StartingCharacter} from "../newType";
-import {ERROR_CODE, HITOMI_LA, HTTPS, validTagTypes} from "../namedConstants";
-import {HitomiError} from "../utils/HitomiError";
+import {TagTypes, StartingCharacter} from "../type.mjs";
+import {ERROR_CODE, HITOMI_LA, HTTPS, validTagTypes} from "../constants.mjs";
+import {HitomiError} from "../utils/HitomiError.mjs";
 
 /**
  * Returns the URI for the specified tag type.

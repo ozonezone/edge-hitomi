@@ -7,9 +7,6 @@
 	"esModuleInterop": true,
 	"forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-	"./node_modules/"
-  ],
   "lib": [
 	"es2024",
 	"webworker",
@@ -18,5 +15,10 @@
   "include": [
 	"./src/**/*",
 	"./dist/index.d.ts"
+  ],
+  "exclude": [
+	"./node_modules/",
+	"./src/test.mts",
+	"./dist/"
   ]
 }

@@ -1,5 +1,5 @@
-import {ERROR_CODE, errorMessages} from "../namedConstants";
-import {ErrorCodeType} from "../newType";
+import {ERROR_CODE, errorMessages} from "../constants.mjs";
+import {ErrorCodeType} from "../type.mjs";
 
 /**
  * Custom error class for handling Hitomi-specific errors

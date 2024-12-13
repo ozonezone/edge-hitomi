@@ -1,7 +1,7 @@
 import {edgeFetch} from "../utils/edgeFetch.mjs";
-import {HitomiError} from "../utils/HitomiError";
-import {ERROR_CODE, HITOMI_LA, HTTPS} from "../namedConstants";
-import {HitomiImage, ImageExtensions} from "../newType";
+import {HitomiError} from "../utils/HitomiError.mjs";
+import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
+import {HitomiImage, ImageExtensions} from "../type.mjs";
 
 export class ImageUriResolver {
 	// As of ES2022, Symbol is not needed for private fields.

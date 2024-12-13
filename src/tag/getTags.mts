@@ -1,7 +1,7 @@
 
-import {ContentTypes, StartingCharacter, Tag, TagTypes} from "../newType";
-import {ERROR_CODE, validContentTypes, validTagTypes} from "../namedConstants";
-import {HitomiError} from "../utils/HitomiError";
+import {ContentTypes, StartingCharacter, Tag, TagTypes} from "../type.mjs";
+import {ERROR_CODE, validContentTypes, validTagTypes} from "../constants.mjs";
+import {HitomiError} from "../utils/HitomiError.mjs";
 import {getTagUri} from "../uri/getTagUri.mjs";
 
 /**

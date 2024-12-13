@@ -1,8 +1,8 @@
-import {Gallery, HitomiImage, Tag} from "../newType";
+import {Gallery, HitomiImage, Tag} from "../type.mjs";
 import {edgeFetch} from "../utils/edgeFetch.mjs";
-import {ContentTypes, JSONGallery} from "../newType";
-import {HitomiError} from "../utils/HitomiError";
-import {ERROR_CODE} from "../namedConstants";
+import {ContentTypes, JSONGallery} from "../type.mjs";
+import {HitomiError} from "../utils/HitomiError.mjs";
+import {ERROR_CODE} from "../constants.mjs";
 
 /**
  * Fetches and formats the gallery object with the given ID

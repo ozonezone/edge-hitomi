@@ -1,5 +1,5 @@
-import {HitomiError} from "./HitomiError";
-import {ERROR_CODE, HITOMI_LA, HTTPS} from "../namedConstants";
+import {HitomiError} from "./HitomiError.mjs";
+import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
 
 
 /**

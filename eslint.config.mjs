@@ -17,6 +17,7 @@ export default tseslint.config(
         rules: {
             "dot-notation": "error"
         },
+        ignores: ["node_modules", "dist", "src/test.mts"],
     },
 
 );

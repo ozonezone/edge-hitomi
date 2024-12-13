@@ -1,4 +1,4 @@
-import {ContentTypes, TagTypes} from "./newType";
+import {ContentTypes, TagTypes} from "./type.mjs";
 
 /**
  * Url Component Constants
@@ -29,6 +29,9 @@ export const errorMessages = {
 	moreElements: 'more elements'
 } as const;
 
+/**
+ * Tag types that are valid.
+ */
 export const validTagTypes: Set<TagTypes> = new Set([
 	'artist',
 	'group',
@@ -41,6 +44,9 @@ export const validTagTypes: Set<TagTypes> = new Set([
 	'female'
 ]);
 
+/**
+ * Content types that are valid.
+ */
 export const validContentTypes: Set<ContentTypes> = new Set<ContentTypes>([
 	'doujinshi',
 	'manga',
@@ -48,3 +54,8 @@ export const validContentTypes: Set<ContentTypes> = new Set<ContentTypes>([
 	'gamecg',
 	'anime',
 	'imageset']);
+
+/**
+ * Symbol for tracking if entire set represents negative IDs
+ */
+export const IS_NEGATIVE = Symbol('isNegative');

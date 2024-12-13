@@ -1,6 +1,6 @@
-import {ERROR_CODE, validTagTypes} from "../namedConstants";
-import {TagTypes, Tag} from "../newType";
-import {HitomiError} from "../utils/HitomiError";
+import {ERROR_CODE, validTagTypes} from "../constants.mjs";
+import {TagTypes, Tag} from "../type.mjs";
+import {HitomiError} from "../utils/HitomiError.mjs";
 
 /**
  * Parses the stringified tags and returns a set of tags. Accepts a delimiter to split
