@@ -6,7 +6,7 @@ import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
  * Fetches data after transformation of Headers
  * @param {'' | `${string}.`} [subdomain] - The subdomain for the request must be empty string or a string ending with a period. `''` or `'ltn.'`
  * @param {'/' | `/${string}`} [path] - The pathname component of the URL. Must be `'/'` or in the form of {@link URL.pathname} string
- * @param {Headers} userHeaders - Optional User provided headers for the request to make request more realistic
+ * @param {HeadersInit} userHeaders - Optional User provided headers for the request to make request more realistic
  * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
  *
  * @throws {HitomiError} Throws if request is rejected (non 200/206 status)
@@ -20,7 +20,7 @@ import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
 export async function edgeFetch(
 	subdomain: '' | `${string}.`,
 	path: '/' | `/${string}`,
-	userHeaders?: Headers,
+	userHeaders?: HeadersInit,
 ): Promise<Response> {
 	const requestOptions: RequestInit = {
 		method: 'GET',
@@ -30,8 +30,9 @@ export async function edgeFetch(
 			Connection: 'keep-alive',
 			Referer: `${HTTPS}${HITOMI_LA}`,
 			Origin: `${HTTPS}${HITOMI_LA}`,
-		} as HeadersInit,
+		},
 	};
+
 	const response: Response = await fetch(
 		`${HTTPS}${subdomain}${HITOMI_LA}${path}`,
 		requestOptions);

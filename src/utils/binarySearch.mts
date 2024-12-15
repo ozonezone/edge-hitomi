@@ -36,6 +36,7 @@ export async function binarySearch(
 	// Find insertion point for key
 	while (index < node.keys.length) {
 		compareResult = compareUint8Arrays(key, node.keys[index]);
+		
 		if (compareResult <= 0) break;
 		index++;
 	}

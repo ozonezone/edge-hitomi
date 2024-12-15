@@ -25,13 +25,11 @@ export function getNode(data: ArrayBuffer): Node {
 		datas: [],
 		subnodeAddresses: []
 	};
-
-	const keyCount = reader.readInt32BE();
-
+	
 	// Read keys
+	const keyCount = reader.readInt32BE();
 	for (let i = 0; i < keyCount; i++) {
 		const keySize = reader.readInt32BE();
-
 		if (keySize > 0 && keySize < 32) {
 			node.keys.push(reader.readBytes(keySize));
 		} else {
@@ -39,7 +37,7 @@ export function getNode(data: ArrayBuffer): Node {
 		}
 	}
 	
-	// Read data entries (offset, length pairs)
+	// Read data entries
 	const dataCount = reader.readInt32BE();
 	for (let i = 0; i < dataCount; i++) {
 		node.datas.push([
@@ -48,10 +46,10 @@ export function getNode(data: ArrayBuffer): Node {
 		]);
 	}
 	
-	// Read 17 fixed subnode addresses
+	// Read fixed 17 subnode addresses
 	for (let i = 0; i < 17; i++) {
 		node.subnodeAddresses.push(reader.readBigUInt64BE());
 	}
-
+	
 	return node;
 }

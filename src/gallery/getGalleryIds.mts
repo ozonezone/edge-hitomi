@@ -5,6 +5,7 @@ import {sha256First4Bytes} from "../utils/sha256First4Bytes.mjs";
 import {getNodeAtAddress} from "../utils/getNodeAtAddress.mjs";
 import {binarySearch} from "../utils/binarySearch.mjs";
 import {edgeFetch, toTypedArray} from "../utils/edgeFetch.mjs";
+import {IS_NEGATIVE} from "../constants.mjs";
 /**
  * Main function to fetch and filter gallery IDs based on various criteria.
  * Implements a complex search and filter pipeline with multiple stages:
@@ -54,12 +55,14 @@ export async function getGalleryIds(options: {
 	// Get version first
 	const response = await edgeFetch('ltn.','/galleriesindex/version');
 	const version = await response.text();
-
-
+	
+	// Initialize our primary result set
+	let resultSet: IdSet;
+	
 	// Handle base case - either popularity order or default list
 	const baseUri = new URL(getNozomiUri({ popularityOrderBy: options.popularityOrderBy }));
 	const baseRange = options.range?.start !== undefined || options.range?.end !== undefined ?
-		new Headers ({ 'Range': `bytes=${(options.range?.start ?? 0) * 4}-${((options.range?.end ?? 0) * 4) - 1}` })
+		{ 'Range': `bytes=${(options.range?.start ?? 0) * 4}-${((options.range?.end ?? 0) * 4) - 1}` }
 	 : undefined;
 
 
@@ -67,7 +70,7 @@ export async function getGalleryIds(options: {
 	const baseResponse = await edgeFetch('ltn.', baseUri.pathname as `/${string}`, baseRange)
 		.then(response => toTypedArray(response))
 		.then(buffer => buffer);
-	const resultSet: IdSet = getIdSet(baseResponse);
+	resultSet = getIdSet(baseResponse);
 
 	// Handle title search if present
 	if (options.title?.trim()) {
@@ -82,23 +85,36 @@ export async function getGalleryIds(options: {
 			if (!node) continue;
 
 			const searchResult = await binarySearch(key, node, version);
-			if (!searchResult) continue;
+			if (!searchResult) {
+				// If any word has no results, the entire search should have no results
+				resultSet = getIdSet(new Uint8Array(0));
+				break;
+			}
 
 			const [offset, length] = searchResult;
 			const dataUri = `/galleriesindex/galleries.${version}.data`;
 			const range = `bytes=${offset + 4n}-${offset + BigInt(length) - 1n}`;
 
-			const wordResponse = await edgeFetch('ltn.', dataUri as `/${string}`,
-				new Headers({'Range': range })
-			);
-			const wordBuffer = await wordResponse.arrayBuffer();
-			const wordIds = getIdSet(new Uint8Array(wordBuffer));
-
+			const wordBuffer = await edgeFetch('ltn.', dataUri as `/${string}`,
+				{'Range': range }
+			).then(response => toTypedArray(response)).then(buffer => buffer);
+			const wordIds = getIdSet(wordBuffer);
+			
 			// Intersect with existing results
+			const newResultSet = getIdSet(new Uint8Array(0));
+			newResultSet[IS_NEGATIVE] = resultSet[IS_NEGATIVE];
+			
 			for (const id of resultSet) {
-				if (!wordIds.has(id)) {
-					resultSet.delete(id);
+				if (wordIds.has(id)) {
+					newResultSet.add(id);
 				}
+			}
+			
+			resultSet = newResultSet;
+			
+			// If we have no results after intersection, we can stop
+			if (resultSet.size === 0) {
+				break;
 			}
 		}
 	}
