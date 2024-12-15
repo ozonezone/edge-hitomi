@@ -50,4 +50,3 @@ temp/
 yarn.lock
 
 src/test.mts
-docs
