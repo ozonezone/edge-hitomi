@@ -4,8 +4,7 @@ import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
 
 /**
  * Fetches data after transformation of Headers
- * @param {'' | `${string}.`} [subdomain] - The subdomain for the request must be empty string or a string ending with a period. `''` or `'ltn.'`
- * @param {'/' | `/${string}`} [path] - The pathname component of the URL. Must be `'/'` or in the form of {@link URL.pathname} string
+ * @param {string} URL - The URL to fetch data from
  * @param {HeadersInit} userHeaders - Optional User provided headers for the request to make request more realistic
  * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
  *
@@ -13,13 +12,9 @@ import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
  * @throws {HitomiError} Throws if response body is null
  * @throws {HitomiError} Throws if any network or processing error occurs
  *
- * @example
- * const headers = request.headers;
- * const typedArray = await edgeFetch('ltn., '/path', headers);
  */
 export async function edgeFetch(
-	subdomain: '' | `${string}.`,
-	path: '/' | `/${string}`,
+	URL: string,
 	userHeaders?: HeadersInit,
 ): Promise<Response> {
 	const requestOptions: RequestInit = {
@@ -34,15 +29,15 @@ export async function edgeFetch(
 	};
 
 	const response: Response = await fetch(
-		`${HTTPS}${subdomain}${HITOMI_LA}${path}`,
+		URL,
 		requestOptions);
 	
 	if (![200, 206].includes(response.status)) {
-		throw new HitomiError(ERROR_CODE.REQUEST_REJECTED, response.status, path);
+		throw new HitomiError(ERROR_CODE.REQUEST_REJECTED, response.status, URL);
 	}
 	
 	if (!response?.body) {
-		throw new HitomiError(ERROR_CODE.REQUEST_REJECTED, 422, path);
+		throw new HitomiError(ERROR_CODE.REQUEST_REJECTED, 422, URL);
 	}
 	return response;
 }

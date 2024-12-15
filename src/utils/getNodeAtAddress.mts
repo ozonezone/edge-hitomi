@@ -1,10 +1,10 @@
 import {getNode} from "./getNode.mjs";
 import {Node} from "../type.mjs";
 import {edgeFetch} from "./edgeFetch.mjs";
+import {HITOMI_LA, HTTPS} from "../constants.mjs";
 
 export async function getNodeAtAddress(address: bigint, version: string): Promise<Node | undefined> {
-	const response = await edgeFetch(
-		"ltn.", `/galleriesindex/galleries.${version}.index`,
+	const response = await edgeFetch(`${HTTPS}ltn.${HITOMI_LA}/galleriesindex/galleries.${version}.index`,
 			{
 				Range: `bytes=${address}-${address + 463n}`
 			}

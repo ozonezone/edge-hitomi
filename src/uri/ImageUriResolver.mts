@@ -15,7 +15,7 @@ export class ImageUriResolver {
 	 * @throws {HitomiError} - If the subdomain codes contain an invalid value
 	 */
 	static async synchronize(): Promise<void> {
-		this.#response = await edgeFetch('ltn.', '/gg.js')
+		this.#response = await edgeFetch(`${HTTPS}ltn.${HITOMI_LA}/gg.js`)
 			.then(async (res)  => await res.text());
 
 		let currentIndex: number = 0;

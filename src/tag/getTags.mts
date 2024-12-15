@@ -26,13 +26,13 @@ export async function getTags(type: TagTypes, startsWith?: StartingCharacter): P
             }))
         );
 	}
-	const path: string = new URL(getTagUri(type, startsWith)).pathname;
+	const path: string = getTagUri(type, startsWith);
 	
+	const response: string = await edgeFetch(path)
+		.then(res => res.text())
+		.then(text => text);
 	
 	if (type === 'language') {
-		const response: string = await edgeFetch("ltn.", path as `/${string}`)
-			.then(res => res.text())
-			.then(text => text);
 		const languages = JSON.parse(response
 			.replace(/^\/(.|\n)*language_localname *= */, '')
 			.replace(/;$/, '')) as Record<string, string>;
@@ -41,9 +41,6 @@ export async function getTags(type: TagTypes, startsWith?: StartingCharacter): P
 			name: localName,
 		}));
 	}
-	const response: string = await edgeFetch("", path as `/${string}`)
-		.then(res => res.text())
-		.then(text => text);
 	const tags: Tag[] = [];
 	const target: string = `${type === "male" || type === "female" ? `/${type}%3A` : `${type}/`}[^-]+`;
 	const targetRegex: RegExp = new RegExp(target, 'g');

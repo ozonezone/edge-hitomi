@@ -5,7 +5,7 @@ import {sha256First4Bytes} from "../utils/sha256First4Bytes.mjs";
 import {getNodeAtAddress} from "../utils/getNodeAtAddress.mjs";
 import {binarySearch} from "../utils/binarySearch.mjs";
 import {edgeFetch, toTypedArray} from "../utils/edgeFetch.mjs";
-import {IS_NEGATIVE} from "../constants.mjs";
+import {HITOMI_LA, HTTPS, IS_NEGATIVE} from "../constants.mjs";
 /**
  * Main function to fetch and filter gallery IDs based on various criteria.
  * Implements a complex search and filter pipeline with multiple stages:
@@ -53,21 +53,21 @@ export async function getGalleryIds(options: {
 	popularityOrderBy?: PopularityPeriod;
 } = {}): Promise<number[]> {
 	// Get version first
-	const response = await edgeFetch('ltn.','/galleriesindex/version');
+	const response = await edgeFetch(`${HTTPS}ltn.${HITOMI_LA}/galleriesindex/version`);
 	const version = await response.text();
 	
 	// Initialize our primary result set
 	let resultSet: IdSet;
 	
 	// Handle base case - either popularity order or default list
-	const baseUri = new URL(getNozomiUri({ popularityOrderBy: options.popularityOrderBy }));
+	const baseUri = getNozomiUri({ popularityOrderBy: options.popularityOrderBy });
 	const baseRange = options.range?.start !== undefined || options.range?.end !== undefined ?
 		{ 'Range': `bytes=${(options.range?.start ?? 0) * 4}-${((options.range?.end ?? 0) * 4) - 1}` }
 	 : undefined;
 
 
 
-	const baseResponse = await edgeFetch('ltn.', baseUri.pathname as `/${string}`, baseRange)
+	const baseResponse = await edgeFetch(baseUri, baseRange)
 		.then(response => toTypedArray(response))
 		.then(buffer => buffer);
 	resultSet = getIdSet(baseResponse);
@@ -92,12 +92,12 @@ export async function getGalleryIds(options: {
 			}
 
 			const [offset, length] = searchResult;
-			const dataUri = `/galleriesindex/galleries.${version}.data`;
+			const dataUri = `${HTTPS}ltn.${HITOMI_LA}/galleriesindex/galleries.${version}.data`;
 			const range = `bytes=${offset + 4n}-${offset + BigInt(length) - 1n}`;
 
-			const wordBuffer = await edgeFetch('ltn.', dataUri as `/${string}`,
-				{'Range': range }
-			).then(response => toTypedArray(response)).then(buffer => buffer);
+			const wordBuffer = await edgeFetch(dataUri, {'Range': range })
+				.then(response => toTypedArray(response))
+				.then(buffer => buffer);
 			const wordIds = getIdSet(wordBuffer);
 			
 			// Intersect with existing results
@@ -122,8 +122,8 @@ export async function getGalleryIds(options: {
 	// Handle tags (rest of function remains the same...)
 	if (options.tags?.length) {
 		for (const tag of options.tags) {
-			const tagUri = new URL(getNozomiUri({ tag }));
-			const tagBuffer = await edgeFetch('ltn.', tagUri.pathname as `/${string}`)
+			const tagUri = getNozomiUri({ tag });
+			const tagBuffer = await edgeFetch(tagUri)
 				.then(response => toTypedArray(response))
 				.then(buffer => buffer);
 

@@ -35,6 +35,6 @@ const errorFormatters: Record<ErrorCodeType, (values: (string | number)[]) => st
 		`${values[0]}${errorMessages.mustHave}${values[1] || errorMessages.moreElements}`,
 	
 	[ERROR_CODE.REQUEST_REJECTED]: (values) =>
-		`${errorMessages.requestRejected}[${values[0]}]${values[1]}`,
+		`${errorMessages.requestRejected}[${values[0]}]: ${values[1]}`,
 
 };

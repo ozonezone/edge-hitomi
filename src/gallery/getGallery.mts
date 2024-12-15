@@ -2,7 +2,7 @@ import {Gallery, HitomiImage, Tag} from "../type.mjs";
 import {edgeFetch} from "../utils/edgeFetch.mjs";
 import {ContentTypes, JSONGallery} from "../type.mjs";
 import {HitomiError} from "../utils/HitomiError.mjs";
-import {ERROR_CODE} from "../constants.mjs";
+import {ERROR_CODE, HITOMI_LA, HTTPS} from "../constants.mjs";
 
 /**
  * Fetches and formats the gallery object with the given ID
@@ -11,7 +11,7 @@ import {ERROR_CODE} from "../constants.mjs";
  * @returns {Promise<Gallery>} - A promise that resolves to the gallery object
  */
 export async function getGallery(id: number, userHeaders?: Headers): Promise<Gallery> {
-	const response = await edgeFetch('ltn.', `/galleries/${id}.js`, userHeaders)
+	const response = await edgeFetch(`${HTTPS}ltn.${HITOMI_LA}/galleries/${id}.js`, userHeaders)
 		.then(res => res.text())
 		.then(text => JSON.parse(text.replace(/^var +\w+ *= */, '')) as JSONGallery);
 	console.log(response);
