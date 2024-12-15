@@ -49,4 +49,4 @@ temp/
 !.yarn/cache
 yarn.lock
 
-srtest.mts
+src/test.mts
