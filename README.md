@@ -7,6 +7,8 @@ This is a completely rewritten version of the
 but only using the 
 [Javascript Web API](https://developer.mozilla.org/en-US/docs/Web/API).
 
+#### Documentations: [edge-hitomi.pages.dev](https://edge-hitomi.pages.dev/)
+
 ### Why is this necessary if the original project has no dependencies?
 The original project uses a lot of Native Node.js modules which are not 
 feasible in environments where Node.js is not available or not native (such 
@@ -37,7 +39,9 @@ you are using this on a different platform, make a pull request editing this
 README.md file.**
 
 ### How can I use this?
-Right now, this project has not been published on NPM. You can clone this project and 
+Right now, this project has not been published on NPM. 
+
+You can clone this project and 
 build using (you can skip this step if you are not making any changes)
 ```bash
 yarn build
@@ -80,3 +84,19 @@ environments as they tend to have minimal resources and timing. Right
 now, it is only ported to the Web API, but the optimizations are not done. 
 If you would like to help with optimizing, please make a pull request with 
 the changes. I will be happy to review them.
+
+### Contributing
+If you would like to contribute to this project, please make a pull request
+with the changes. I will be happy to review them. If you have changed the
+JSDocs, please run
+```bash
+yarn docs
+```
+or (if you are using npm)
+```bash
+npm run docs
+```
+
+### License
+This project is licensed under the MIT License. Please see the
+LICENSE file for more information.
