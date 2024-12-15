@@ -7,7 +7,7 @@ This is a completely rewritten version of the
 but only using the 
 [Javascript Web API](https://developer.mozilla.org/en-US/docs/Web/API).
 
-#### Documentations: [edge-hitomi.pages.dev](https://edge-hitomi.pages.dev/)
+#### Documentations: [Github Pages](https://ztmayo.github.io/edge-hitomi/)
 
 ### Why is this necessary if the original project has no dependencies?
 The original project uses a lot of Native Node.js modules which are not 
