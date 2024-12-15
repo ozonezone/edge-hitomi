@@ -24,9 +24,9 @@ from the website.
 
 ### Where can I use this?
 Currently, all the functionalities are tested and working on Vercel/Next.js 
-edge runtime, and Cloudflare Workers. As these are the two platforms I 
+edge runtime, and Cloudflare Workers. (CPU time and execution time hasn't been fully tested.) As these are the two platforms I 
 intended to use this project on, I have not tested it on other platforms. 
-However, I believe it should work on any platform that runs on a browser-based Javascript runtime like Chrome V8 Engine, Deno, Node.js. 
+However, I believe it should work on any platform that runs on a browser-based Javascript runtime like Chrome V8 Engine, Deno, Node. 
 
 Note that this will not work natively with browsers as it modifies 
 [Forbidden Header Names](https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name).
