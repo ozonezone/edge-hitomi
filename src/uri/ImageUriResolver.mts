@@ -70,7 +70,7 @@ export class ImageUriResolver {
 	static getImageUri(
 		image: HitomiImage,
 		extension: ImageExtensions,
-		options: { isThumbnail?: boolean; isSmall?: boolean; }): string {
+		options?: { isThumbnail?: boolean; isSmall?: boolean; }): string {
 
 		/*
 		As of now, the fullsize image pathname is as follows:
@@ -85,7 +85,7 @@ export class ImageUriResolver {
 		gg from /gg.js
 		 */
 
-		if(!options.isThumbnail && options.isSmall) {
+		if(!options?.isThumbnail && options?.isSmall) {
 			throw new HitomiError(ERROR_CODE.INVALID_VALUE, "isSmall", "used w/ isThumbnail");
 		}
 
@@ -103,11 +103,11 @@ export class ImageUriResolver {
 		const imageHashCode: number = Number.parseInt(imageHashCodeParts[0] + imageHashCodeParts[1], 16);
 		// both webp and avif have smalltn and smallsmalltn,
 		// bigtn thumbnails tend to be unreliable.
-		if(options.isThumbnail) {
+		if(options?.isThumbnail) {
 			path += `${options.isSmall ? "small" : ""}smalltn/${imageHashCodeParts[0]}/${imageHashCodeParts[1]}`;
 			subdomain = "tn";
 		} else {
-			path += `/${this.#pathCode}/`;
+			path += `/${this.#pathCode}/${imageHashCode}`;
 		}
 		// Reference subdomain_from_url from /common.js
 		return `${HTTPS}${this.#subdomainCodes.has(imageHashCode) === this.#startsWithA ? "a" : "b"}${subdomain}.${HITOMI_LA}/${path}/${image.hash}.${extension}`

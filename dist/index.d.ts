@@ -220,7 +220,7 @@ declare class ImageUriResolver {
      * @throws {HitomiError} - If the subdomain codes are not synchronized
      * @throws {HitomiError} - If the image is not a thumbnail and is small
      **/
-    static getImageUri(image: HitomiImage, extension: ImageExtensions, options: {
+    static getImageUri(image: HitomiImage, extension: ImageExtensions, options?: {
         isThumbnail?: boolean;
         isSmall?: boolean;
     }): string;
