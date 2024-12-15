@@ -190,7 +190,7 @@ declare function getGalleryUri(gallery: Gallery | number | string): string;
 
 /**
  * Fetches data after transformation of Headers
- *
+ * @param {string} URL - The URL to fetch data from
  * @param {HeadersInit} userHeaders - Optional User provided headers for the request to make request more realistic
  * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
  *
