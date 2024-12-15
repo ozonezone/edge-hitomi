@@ -188,6 +188,23 @@ declare function getVideoUri(gallery: Gallery): string;
  */
 declare function getGalleryUri(gallery: Gallery | number | string): string;
 
+/**
+ * Fetches data after transformation of Headers
+ * @param {'' | `${string}.`} [subdomain] - The subdomain for the request must be empty string or a string ending with a period. `''` or `'ltn.'`
+ * @param {'/' | `/${string}`} [path] - The pathname component of the URL. Must be `'/'` or in the form of {@link URL.pathname} string
+ * @param {Headers} userHeaders - Optional User provided headers for the request to make request more realistic
+ * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
+ *
+ * @throws {HitomiError} Throws if request is rejected (non 200/206 status)
+ * @throws {HitomiError} Throws if response body is null
+ * @throws {HitomiError} Throws if any network or processing error occurs
+ *
+ * @example
+ * const headers = request.headers;
+ * const typedArray = await edgeFetch('ltn., '/path', headers);
+ */
+declare function edgeFetch(subdomain: '' | `${string}.`, path: '/' | `/${string}`, userHeaders?: Headers): Promise<Response>;
+
 declare class ImageUriResolver {
     #private;
     /**
@@ -212,23 +229,6 @@ declare class ImageUriResolver {
         isSmall?: boolean;
     }): string;
 }
-
-/**
- * Fetches data after transformation of Headers
- * @param {'' | `${string}.`} [subdomain] - The subdomain for the request must be empty string or a string ending with a period. `''` or `'ltn.'`
- * @param {'/' | `/${string}`} [path] - The pathname component of the URL. Must be `'/'` or in the form of {@link URL.pathname} string
- * @param {Headers} userHeaders - Optional User provided headers for the request to make request more realistic
- * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
- *
- * @throws {HitomiError} Throws if request is rejected (non 200/206 status)
- * @throws {HitomiError} Throws if response body is null
- * @throws {HitomiError} Throws if any network or processing error occurs
- *
- * @example
- * const headers = request.headers;
- * const typedArray = await edgeFetch('ltn., '/path', headers);
- */
-declare function edgeFetch(subdomain: '' | `${string}.`, path: '/' | `/${string}`, userHeaders?: Headers): Promise<Response>;
 
 declare const _default: {
     getGallery: typeof getGallery;
