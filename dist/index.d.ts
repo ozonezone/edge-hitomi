@@ -192,7 +192,7 @@ declare function getGalleryUri(gallery: Gallery | number | string): string;
  * Fetches data after transformation of Headers
  * @param {'' | `${string}.`} [subdomain] - The subdomain for the request must be empty string or a string ending with a period. `''` or `'ltn.'`
  * @param {'/' | `/${string}`} [path] - The pathname component of the URL. Must be `'/'` or in the form of {@link URL.pathname} string
- * @param {Headers} userHeaders - Optional User provided headers for the request to make request more realistic
+ * @param {HeadersInit} userHeaders - Optional User provided headers for the request to make request more realistic
  * @returns {Promise<Response>} - A promise that resolves to an ArrayBuffer containing the response data
  *
  * @throws {HitomiError} Throws if request is rejected (non 200/206 status)
@@ -203,7 +203,7 @@ declare function getGalleryUri(gallery: Gallery | number | string): string;
  * const headers = request.headers;
  * const typedArray = await edgeFetch('ltn., '/path', headers);
  */
-declare function edgeFetch(subdomain: '' | `${string}.`, path: '/' | `/${string}`, userHeaders?: Headers): Promise<Response>;
+declare function edgeFetch(subdomain: '' | `${string}.`, path: '/' | `/${string}`, userHeaders?: HeadersInit): Promise<Response>;
 
 declare class ImageUriResolver {
     #private;
