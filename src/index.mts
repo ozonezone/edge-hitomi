@@ -8,6 +8,20 @@ import {getVideoUri} from "./uri/getVideoUri.mjs";
 import {getGalleryUri} from "./uri/getGalleryUri.mjs";
 import {edgeFetch} from "./utils/edgeFetch.mjs";
 import {ImageUriResolver} from "./uri/ImageUriResolver.mjs";
+import {
+	ErrorCodeType,
+	JSONGallery,
+	ContentTypes,
+	TagTypes,
+	Tag,
+	Gallery,
+	HitomiImage,
+	ImageExtensions,
+	Node,
+	IdSet,
+	PopularityPeriod,
+	StartingCharacter
+} from "./type.mjs";
 
 export {
 	getGallery,
@@ -19,7 +33,19 @@ export {
 	getVideoUri,
 	getGalleryUri,
 	ImageUriResolver,
-	edgeFetch
+	edgeFetch,
+	ErrorCodeType,
+	JSONGallery,
+	ContentTypes,
+	TagTypes,
+	Tag,
+	Gallery,
+	HitomiImage,
+	ImageExtensions,
+	Node,
+	IdSet,
+	PopularityPeriod,
+	StartingCharacter
 };
 
 // If you really need a default export
@@ -33,5 +59,5 @@ export default {
 	getVideoUri,
 	getGalleryUri,
 	ImageUriResolver,
-	edgeFetch
+	edgeFetch,
 };

@@ -1,4 +1,80 @@
 /**
+ * Error codes used throughout the application.
+ */
+declare const ERROR_CODE: {
+    readonly INVALID_VALUE: "INVALID_VALUE";
+    readonly DUPLICATED_ELEMENT: "DUPLICATED_ELEMENT";
+    readonly LACK_OF_ELEMENT: "LACK_OF_ELEMENT";
+    readonly REQUEST_REJECTED: "REQUEST_REJECTED";
+};
+/**
+ * Symbol for tracking if entire set represents negative IDs
+ */
+declare const IS_NEGATIVE: unique symbol;
+
+/**
+ * Type representing the values of the ERROR_CODE object.
+ */
+type ErrorCodeType = typeof ERROR_CODE[keyof typeof ERROR_CODE];
+/**
+ * Type representing the values of the Response from /galleries endpoint.
+ */
+type JSONGallery = {
+    artists: Array<{
+        artist: string;
+        url: string;
+    }> | null;
+    blocked: number;
+    characters: Array<{
+        character: string;
+        url: string;
+    }> | null;
+    date: string;
+    datepublished: string | null;
+    files: Array<{
+        hasavif: number;
+        hash: string;
+        hasjxl: number;
+        haswebp: number;
+        height: number;
+        name: string;
+        single?: number;
+        width: number;
+    }>;
+    galleryurl: string;
+    groups: Array<{
+        group: string;
+        url: string;
+    }> | null;
+    id: number | string;
+    japanese_title: string | null;
+    language: string | null;
+    language_localname: string | null;
+    language_url: string | null;
+    languages: Array<{
+        galleryid: number;
+        language_localname: string;
+        name: string;
+        url: string;
+    }>;
+    parodys: Array<{
+        parody: string;
+        url: string;
+    }> | null;
+    related: Array<number>;
+    scene_indexes: Array<number>;
+    tags: Array<{
+        tag: string;
+        url: string;
+        female?: string | number;
+        male?: string | number;
+    }>;
+    title: string;
+    type: string;
+    video: string | null;
+    videofilename: string | null;
+};
+/**
  * Type representing the values of valid Content Types.
  */
 type ContentTypes = 'doujinshi' | 'manga' | 'artistcg' | 'gamecg' | 'anime' | 'imageset';
@@ -63,6 +139,26 @@ type StartingCharacter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | '
  * Type representing the values of the popularity periods.
  */
 type PopularityPeriod = 'day' | 'week' | 'month' | 'year';
+/**
+ * Extended Set type that includes isNegative flag for the entire collection
+ */
+interface IdSet extends Set<number> {
+    [IS_NEGATIVE]: boolean;
+}
+/**
+ * Represents a node in the binary search tree used for gallery indexing.
+ * Each node contains keys for searching, data pointers, and references to child nodes.
+ *
+ * @interface
+ */
+interface Node {
+    /** Array of keys used for searching */
+    keys: Uint8Array[];
+    /** Array of [offset, length] pairs pointing to gallery data */
+    datas: [bigint, number][];
+    /** Array of addresses pointing to child nodes */
+    subnodeAddresses: bigint[];
+}
 
 /**
  * Fetches and formats the gallery object with the given ID
@@ -239,4 +335,4 @@ declare const _default: {
     edgeFetch: typeof edgeFetch;
 };
 
-export { ImageUriResolver, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri };
+export { type ContentTypes, type ErrorCodeType, type Gallery, type HitomiImage, type IdSet, type ImageExtensions, ImageUriResolver, type JSONGallery, type Node, type PopularityPeriod, type StartingCharacter, type Tag, type TagTypes, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri };
