@@ -237,18 +237,6 @@ declare const _default: {
     getGalleryUri: typeof getGalleryUri;
     ImageUriResolver: typeof ImageUriResolver;
     edgeFetch: typeof edgeFetch;
-    default: {
-        getGallery: typeof getGallery;
-        getGalleryIds: typeof getGalleryIds;
-        getParsedTags: typeof getParsedTags;
-        getTags: typeof getTags;
-        getNozomiUri: typeof getNozomiUri;
-        getTagUri: typeof getTagUri;
-        getVideoUri: typeof getVideoUri;
-        getGalleryUri: typeof getGalleryUri;
-        ImageUriResolver: typeof ImageUriResolver;
-        edgeFetch: typeof edgeFetch;
-    };
 };
 
-export { _default as default };
+export { ImageUriResolver, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri };

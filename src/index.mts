@@ -9,7 +9,20 @@ import {getGalleryUri} from "./uri/getGalleryUri.mjs";
 import {edgeFetch} from "./utils/edgeFetch.mjs";
 import {ImageUriResolver} from "./uri/ImageUriResolver.mjs";
 
+export {
+	getGallery,
+	getGalleryIds,
+	getParsedTags,
+	getTags,
+	getNozomiUri,
+	getTagUri,
+	getVideoUri,
+	getGalleryUri,
+	ImageUriResolver,
+	edgeFetch
+};
 
+// If you really need a default export
 export default {
 	getGallery,
 	getGalleryIds,
@@ -20,17 +33,5 @@ export default {
 	getVideoUri,
 	getGalleryUri,
 	ImageUriResolver,
-	edgeFetch,
-	default: {
-		getGallery,
-		getGalleryIds,
-		getParsedTags,
-		getTags,
-		getNozomiUri,
-		getTagUri,
-		getVideoUri,
-		getGalleryUri,
-		ImageUriResolver,
-		edgeFetch,
-	}
-}
+	edgeFetch
+};
