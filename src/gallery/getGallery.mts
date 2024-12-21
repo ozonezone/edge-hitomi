@@ -14,7 +14,7 @@ export async function getGallery(id: number, userHeaders?: Headers): Promise<Gal
 	const response = await edgeFetch(`${HTTPS}ltn.${HITOMI_LA}/galleries/${id}.js`, userHeaders)
 		.then(res => res.text())
 		.then(text => JSON.parse(text.replace(/^var +\w+ *= */, '')) as JSONGallery);
-	console.log(response);
+	//console.log(response);
 	return {
 		id: Number.parseInt(response.id as string),
 		title: {
