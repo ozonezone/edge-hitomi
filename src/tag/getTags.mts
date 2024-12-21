@@ -36,9 +36,9 @@ export async function getTags(type: TagTypes, startsWith?: StartingCharacter): P
 		const languages = JSON.parse(response
 			.replace(/^\/(.|\n)*language_localname *= */, '')
 			.replace(/;$/, '')) as Record<string, string>;
-		return Object.entries(languages).map(([ , localName]: [string, string]): Tag => ({
+		return Object.entries(languages).map(([engName , ]: [string, string]): Tag => ({
 			type: 'language',
-			name: localName,
+			name: engName,
 		}));
 	}
 	const tags: Tag[] = [];
