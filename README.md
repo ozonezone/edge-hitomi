@@ -39,9 +39,16 @@ you are using this on a different platform, make a pull request editing this
 README.md file.**
 
 ### How can I use this?
-Right now, this project has not been published on NPM. 
+```bash
+yarn add edge-hitomi
+```
+or (if you are using npm)
+```bash
+npm i edge-hitomi
+```
 
-You can clone this project and 
+### How do I work on this project?
+You can clone this project and make your changes then\
 build using (you can skip this step if you are not making any changes)
 ```bash
 yarn build
@@ -49,24 +56,6 @@ yarn build
 or (if you are using npm)
 ```bash
 npm run build
-```
-\
-and the output is in the `dist` folder. You can then use
-```bash
-yarn pack
-```
-or (if you are using npm)
-```bash
-npm pack
-```
-\
-to create a tarball which you can then install using
-```bash
-yarn add <path-to-tarball>
-```
-or (if you are using npm)
-```bash
-npm install <path-to-tarball>
 ```
 
 ### Limitations
