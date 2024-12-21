@@ -1,6 +1,6 @@
 {
 	"name": "edge-hitomi",
-	"version": "8.0.5-edge.1-pre-release-7",
+	"version": "8.0.6-edge.1",
 	"description": "edging hitomi",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
