@@ -54,7 +54,15 @@ export async function getTags(type: TagTypes, startsWith?: StartingCharacter): P
 				type: type,
 				name: decodeURIComponent(anchorTag.replace(`/${type}%3A`, ''))
 			});
-        } else {
+        } else if (type === 'tag') {
+			if(!anchorTag.includes("male%3A")) {
+				tags.push({
+					type: type,
+					name: decodeURIComponent(anchorTag.replace('tag/', ''))
+				});
+			}
+			
+		} else {
 			tags.push({
 				type: type,
 				name: decodeURIComponent(anchorTag.replace(`${type}/`, ''))

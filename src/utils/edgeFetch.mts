@@ -51,27 +51,3 @@ export async function toTypedArray(response: Response): Promise<Uint8Array> {
 	const buffer = await response.arrayBuffer();
 	return new Uint8Array(buffer);
 }
-
-export async function toTypedArraySlow(response: Response): Promise<Uint8Array> {
-	const chunks: Uint8Array<ArrayBufferLike>[] = [],
-		  reader = response.body!.getReader() ;
-	let totalLength: number = 0;
-
-	while (true) {
-		const {done, value} = await reader.read();
-		if (done) {
-			break;
-		}
-		chunks.push(value);
-		totalLength += value.length;
-	}
-	const outputArrayBuffer: Uint8Array<ArrayBuffer> = new Uint8Array(totalLength);
-	let offset: number = 0;
-
-	for (const chunk of chunks) {
-		outputArrayBuffer.set(chunk, offset);
-		offset += chunk.length;
-	}
-	return outputArrayBuffer;
-}
-
