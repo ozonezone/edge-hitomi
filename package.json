@@ -12,7 +12,7 @@
 	"test": "node --require=ts-node/register --watch src/test.mts",
 	"lint": "eslint src --ext .ts",
 	"prepublishOnly": "npm run build",
-	"docs": "npx typedoc 'src/*' 'src/**/*' --exclude node_modules --exclude src/test.mts --plugin typedoc-material-theme --themeColor '#cb9820' --entryPointStrategy expand"
+	"docs": "npx typedoc 'src/*' --exclude node_modules --exclude src/test.mts --plugin typedoc-material-theme --themeColor '#cb9820' --entryPointStrategy expand"
   },
   "keywords": [
 	"hitomi",
