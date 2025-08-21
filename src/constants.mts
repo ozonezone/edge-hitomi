@@ -3,7 +3,7 @@ import {ContentTypes, TagTypes} from "./type.mjs";
 /**
  * Url Component Constants
  */
-export const HITOMI_LA = 'hitomi.la';
+export const HITOMI_LA = 'gold-usergeneratedcontent.net';
 export const HTTPS = 'https://';
 
 /**
