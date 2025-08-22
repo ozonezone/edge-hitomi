@@ -6,7 +6,7 @@ import { getNozomiUri } from "./uri/getNozomiUri.mjs";
 import { getTagUri } from "./uri/getTagUri.mjs";
 import { getVideoUri } from "./uri/getVideoUri.mjs";
 import { getGalleryUri } from "./uri/getGalleryUri.mjs";
-import { edgeFetch, setEdgeFetch } from "./utils/edgeFetch.mjs";
+import { edgeFetch, setFetch } from "./utils/edgeFetch.mjs";
 import { ImageUriResolver } from "./uri/ImageUriResolver.mjs";
 import {
   ContentTypes,
@@ -25,7 +25,7 @@ import {
 
 export {
   ContentTypes,
-  edgeFetch as const,
+  edgeFetch,
   ErrorCodeType,
   Gallery,
   getGallery,
@@ -43,7 +43,7 @@ export {
   JSONGallery,
   Node,
   PopularityPeriod,
-  setEdgeFetch,
+  setFetch,
   StartingCharacter,
   Tag,
   TagTypes,

@@ -294,9 +294,9 @@ declare function getGalleryUri(gallery: Gallery | number | string): string;
  * @throws {HitomiError} Throws if response body is null
  * @throws {HitomiError} Throws if any network or processing error occurs
  */
-declare let edgeFetch: typeof defaultEdgeFetch;
+declare const edgeFetch: typeof defaultEdgeFetch;
 declare function defaultEdgeFetch(URL: string, userHeaders?: HeadersInit): Promise<Response>;
-declare function setEdgeFetch(fetchFunction: (URL: string, userHeaders?: HeadersInit) => Promise<Response>): void;
+declare function setFetch(fetchFunction: (URL: string, opts?: RequestInit) => Promise<Response>): void;
 
 declare class ImageUriResolver {
     #private;
@@ -336,4 +336,4 @@ declare const _default: {
     edgeFetch: (URL: string, userHeaders?: HeadersInit) => Promise<Response>;
 };
 
-export { type ContentTypes, type ErrorCodeType, type Gallery, type HitomiImage, type IdSet, type ImageExtensions, ImageUriResolver, type JSONGallery, type Node, type PopularityPeriod, type StartingCharacter, type Tag, type TagTypes, edgeFetch as const, _default as default, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri, setEdgeFetch };
+export { type ContentTypes, type ErrorCodeType, type Gallery, type HitomiImage, type IdSet, type ImageExtensions, ImageUriResolver, type JSONGallery, type Node, type PopularityPeriod, type StartingCharacter, type Tag, type TagTypes, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri, setFetch };

@@ -1,6 +1,11 @@
 import { HitomiError } from "./HitomiError.mjs";
 import { ERROR_CODE, HITOMI_LA, HTTPS } from "../constants.mjs";
 
+let fetchSource: (
+  URL: string,
+  opts?: RequestInit,
+) => Promise<Response> = fetch;
+
 /**
  * Fetches data after transformation of Headers
  * @param {string} URL - The URL to fetch data from
@@ -11,7 +16,7 @@ import { ERROR_CODE, HITOMI_LA, HTTPS } from "../constants.mjs";
  * @throws {HitomiError} Throws if response body is null
  * @throws {HitomiError} Throws if any network or processing error occurs
  */
-export let edgeFetch = defaultEdgeFetch;
+export const edgeFetch = defaultEdgeFetch;
 
 async function defaultEdgeFetch(
   URL: string,
@@ -28,7 +33,7 @@ async function defaultEdgeFetch(
     },
   };
 
-  const response: Response = await fetch(
+  const response: Response = await fetchSource(
     URL,
     requestOptions,
   );
@@ -43,10 +48,10 @@ async function defaultEdgeFetch(
   return response;
 }
 
-export function setEdgeFetch(
-  fetchFunction: (URL: string, userHeaders?: HeadersInit) => Promise<Response>,
+export function setFetch(
+  fetchFunction: (URL: string, opts?: RequestInit) => Promise<Response>,
 ) {
-  edgeFetch = fetchFunction;
+  fetchSource = fetchFunction;
 }
 
 /**
