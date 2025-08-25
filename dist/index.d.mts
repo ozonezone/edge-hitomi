@@ -1,4 +1,8 @@
 /**
+ * Url Component Constants
+ */
+declare const HITOMI_LA = "gold-usergeneratedcontent.net";
+/**
  * Error codes used throughout the application.
  */
 declare const ERROR_CODE: {
@@ -336,4 +340,4 @@ declare const _default: {
     edgeFetch: (URL: string, userHeaders?: HeadersInit) => Promise<Response>;
 };
 
-export { type ContentTypes, type ErrorCodeType, type Gallery, type HitomiImage, type IdSet, type ImageExtensions, ImageUriResolver, type JSONGallery, type Node, type PopularityPeriod, type StartingCharacter, type Tag, type TagTypes, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri, setFetch };
+export { type ContentTypes, type ErrorCodeType, type Gallery, HITOMI_LA, type HitomiImage, type IdSet, type ImageExtensions, ImageUriResolver, type JSONGallery, type Node, type PopularityPeriod, type StartingCharacter, type Tag, type TagTypes, _default as default, edgeFetch, getGallery, getGalleryIds, getGalleryUri, getNozomiUri, getParsedTags, getTagUri, getTags, getVideoUri, setFetch };

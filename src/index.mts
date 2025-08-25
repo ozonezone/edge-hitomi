@@ -22,6 +22,7 @@ import {
   Tag,
   TagTypes,
 } from "./type.mjs";
+import { HITOMI_LA } from "./constants.mjs";
 
 export {
   ContentTypes,
@@ -36,6 +37,7 @@ export {
   getTags,
   getTagUri,
   getVideoUri,
+  HITOMI_LA,
   HitomiImage,
   IdSet,
   ImageExtensions,
